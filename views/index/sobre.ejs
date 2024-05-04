@@ -1,11 +1,259 @@
-<div class="container-fluid">
+<div class="vaga">
+	<div class="inicio">
+		<h1 class="titulo1">
+			Para uma <span class="negrito">São Paulo</span> e um <span class="negrito">Brasil</span> mais <span
+				class="negrito2">inclusivo </span>
+		</h1>
+		<p class="desc1">
+			Venha conhecer mais da nossa equipe, nossa missão e nossos valores; e como queremos impactar a situação
+			atual
+			da acessibilidade em São Paulo e no Brasil
+		</p>
+	</div>
+</div>
 
-	<h1>
-		Sobre
-	</h1>
 
-	<p>
-		Sobre nós! 😊
-	</p>
+<div class="fundoquem">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h1 class="Espaco">
+					Quem Somos
+				</h1>
+				<p class="Sobr">
+					Nossa equipe é formada por três estudantes do segundo semestre de Sistemas de Informação na Escola
+					Superior de Propaganda
+					e Marketing (ESPM) de São Paulo. Nossa equipe está em fase de expansão e adaptação, estando, sempre,
+					alinhados com a pauta de acessibilidade.
+				</p>
+			</div>
+			<div class="col-md-6">
+				<img class="redonda" src="/public/img/pcd.jpg" alt="PCD-Cadeira">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="fundonossa">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<img class="redonda" src="/public/img/pcd.jpg" alt="Nsei">
+			</div>
+			<div class="col-md-6">
+				<h1 class="Espaco">
+					Nossa Missão
+				</h1>
+				<p class="Sobr">
+					Estamos comprometidos com a acessibilidade e inclusão em São Paulo.
+					Desenvolvemos um website que capacita os usuários a localizar e avaliar a acessibilidade
+					de locais na cidade, promovendo mais informações sobre a experiência assecível do lugar e
+					tornando-a mais inclusiva para todos.
+				</p>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="fundoquem">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<h1 class="Espaco">
+					Nossos Valores
+				</h1>
+				<p class="Sobr">
+					Nossa equipe especializada em tecnologia trabalha incansavelmente para criar
+					soluções digitais intuitivas e eficazes, visando facilitar o acesso a informações vitais para
+					pessoas com diferentes necessidades de mobilidade. Estamos empenhados em tornar São Paulo um lugar
+					mais acessível e acolhedor para todos os seus habitantes e visitantes.
+				</p>
+			</div>
+			<div class="col-md-6">
+				<img class="redonda" src="/public/img/pcd.jpg" alt="PCD-Cadeira">
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="fundope">
+</div>
+
+<div class="pessoas">
+
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4 Parte">
+				<img class="FotoP" src="/public/img/">
+				<h2>
+					Márcio Alexandroni
+				</h2>
+				<p>
+					Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+				</p>
+				<a href="..." class="Max">
+					<img width="30" height="35" src="/public/img/face.svg" />
+				</a>
+				<a href="..." class="Max">
+					<img width="30" height="35" src="/public/img/link.svg" />
+				</a>
+				<a href="..." class="Max">
+					<img width="30" height="35" src="/public/img/git.svg" />
+				</a>
+			</div>
+			<div class="col-md-4 Parte">
+				<img class="FotoP" src="SobreNós/nopf.png">
+				<h2>
+					Gabriel Prestes
+				</h2>
+				<p>
+					Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+				</p>
+				<a href="..." class="Max">
+					<img width="30" height="35" src="/public/img/face.svg" />
+				</a>
+				<a href="..." class="Max">
+					<img width="30" height="35" src="/public/img/link.svg" />
+				</a>
+				<a href="..." class="Max">
+					<img width="30" height="35" src="/public/img/git.svg" />
+				</a>
+			</div>
+			<div class="col-md-4 Parte">
+				<img class="FotoP" src="SobreNós/nopfpg.jpg">
+				<h2>
+					Isabella Soares
+				</h2>
+				<p>
+					Lorem ipsum, dolor sit amet consectetur adipisicing elit.
+				</p>
+				<a href="..." class="Max">
+					<img width="30" height="35" src="/public/img/face.svg" />
+				</a>
+				<a href="..." class="Max">
+					<img width="30" height="35" src="/public/img/link.svg" />
+				</a>
+				<a href="..." class="Max">
+					<img width="30" height="35" src="/public/img/git.svg" />
+				</a>
+			</div>
+		</div>
+	</div>
 
 </div>
+
+<%- contentFor("espaco-head") %>
+
+<style>
+	.redonda {
+		border-radius: 20px;
+		box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4);
+	}
+
+	.inicio {
+		padding: 20px;
+		margin: 20px auto;
+	}
+
+	.titulo1 {
+		font-size: 40px;
+		max-width: 500px;
+		color: rgb(43, 0, 152);
+	}
+
+	.desc1 {
+		font-size: 18px;
+		max-width: 360px;
+		color: rgb(82, 63, 189);
+	}
+
+	.vaga {
+		margin: 0;
+		padding: 80px 120px;
+		background-image: url(/public/img/vaga.jpg);
+		background-position: center center;
+		background-size: cover;
+		background-repeat: no-repeat;
+	}
+
+	.negrito {
+		font-weight: bold;
+	}
+
+	.negrito2 {
+		font-weight: bold;
+		font-style: oblique;
+	}
+
+	.Max {
+		vertical-align: bottom;
+		display: inline-block;
+		margin: 0 auto auto 10px;
+	}
+
+	.Max img {
+		vertical-align: bottom;
+		filter: drop-shadow(1px 1px 1px black);
+	}
+
+	.fundoquem {
+		margin: 0;
+		padding: 100px 80px;
+		background-color: whitesmoke;
+		color: black;
+	}
+
+	.fundonossa {
+		background-color: gainsboro;
+		margin: 0;
+		padding: 100px 80px;
+		color: black;
+	}
+
+	.Sobr {
+		font-size: 20px;
+		padding: 10px;
+		margin: 10px 10px;
+		text-indent: 35px;
+		text-align: justify;
+	}
+
+	.Parte {
+		padding: 20px;
+	}
+
+	.FotoP {
+		max-width: 200px;
+		max-height: 150px;
+		height: auto;
+		border-radius: 999px;
+		margin: 30px auto 30px 20px;
+	}
+
+	.FP {
+		background-image: url(SobreNós/LPC.png);
+		background-position: center center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		margin: 0px;
+		padding: 10px 0;
+	}
+
+	.Espaco {
+		margin: 20px auto 20px 10px;
+	}
+
+	.pessoas {
+		color: black;
+	}
+
+	.fundope {
+		background-image: url(/public/img/o-que-e-pcd.jpg);
+		margin: 0;
+		padding: 160px 100px;
+		background-position: center center;
+		background-size: cover;
+		background-repeat: no-repeat;
+
+	}
+</style>
