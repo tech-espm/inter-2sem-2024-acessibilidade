@@ -21,6 +21,16 @@ class IndexRoute {
 		res.render("index/eventos", opcoes);
 	}
 
+	public async experiencias(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Experiencias"
+		};
+
+		res.render("index/experiencias", opcoes);
+	}
+
+	
+
 	public async locais(req: app.Request, res: app.Response) {
 		let produtoA = {
 			id: 1,
