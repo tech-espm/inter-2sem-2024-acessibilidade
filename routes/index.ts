@@ -13,6 +13,14 @@ class IndexRoute {
 		res.render("index/sobre", opcoes);
 	}
 
+	public async eventos(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Eventos"
+		};
+
+		res.render("index/eventos", opcoes);
+	}
+
 	public async locais(req: app.Request, res: app.Response) {
 		let produtoA = {
 			id: 1,
