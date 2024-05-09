@@ -13,7 +13,7 @@ class IndexRoute {
 		res.render("index/sobre", opcoes);
 	}
 
-	public async produtos(req: app.Request, res: app.Response) {
+	public async locais(req: app.Request, res: app.Response) {
 		let produtoA = {
 			id: 1,
 			nome: "Produto A",
@@ -35,11 +35,11 @@ class IndexRoute {
 		let produtosVindosDoBanco = [ produtoA, produtoB, produtoC ];
 
 		let opcoes = {
-			titulo: "Listagem de Produtos",
+			titulo: "Locais",
 			produtos: produtosVindosDoBanco
 		};
 
-		res.render("index/produtos", opcoes);
+		res.render("index/locais", opcoes);
 	}
 }
 

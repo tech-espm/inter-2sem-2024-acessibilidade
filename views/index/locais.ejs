@@ -1,0 +1,65 @@
+<div class="container-fluid">
+
+	<div class="row">
+		<div class="col-sm-6 col-lg-4 offset-sm-6 offset-lg-8">
+			<div class="card shadow my-5">
+				<div class="card-body">
+					Teste
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<hr/>
+
+	<div class="text-center">
+		<a class="link-local" href="...">
+			<img src="/public/img/logo-si-512.png" width="30" />
+			<br />
+			Chalés
+		</a>
+
+		<a class="link-local" href="...">
+			<img src="/public/img/logo-si-512.png" width="30" />
+			<br />
+			Prédios
+		</a>
+	</div>
+
+	<h1>Sou a página de produtos!</h1>
+
+	<p>Listagem de produtos (<%= produtos.length %> produtos no total)</p>
+
+	<% for (let contador = 0; contador < produtos.length; contador++) { %>
+
+		<h2>
+			<%= produtos[contador].nome %>
+		</h2>
+
+		<p>
+			Id: <%= produtos[contador].id %>
+		</p>
+
+		<p>
+			Valor: R$ <%= produtos[contador].valor %>
+		</p>
+
+		<hr />
+
+	<% } %>
+
+</div>
+
+<%- contentFor("espaco-head") %>
+<style type="text/css">
+	.link-local {
+		display: inline-block;
+		font-size: 0.75rem;
+		vertical-align: bottom;
+		padding: 1.5rem;
+	}
+
+	.link-local + .link-local {
+		margin-left: 15px;
+	}
+</style>
