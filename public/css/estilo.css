@@ -38,3 +38,43 @@ html, body {
 	padding: 1.5rem 1rem;
 	background-color: #ffeeaa;
 }
+
+.locais {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.fundolocais {
+	background-color: rgb(145, 188, 145);
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.fundodolocal {
+	background-image: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtKLkJHW3ip6eTwibE9x94gcjXxUe6B_DC1wODSwVU8Awe_RquHsJ3LBGpRiKq88XkMfDiEUzZdtS44vWdS0_OHdt-GR60vspSGTYsMO2sGrwYU-Wk5MD5D61aOcQ5z-sSj50e9DUbIzrM/s1600/Pense+como+uma+montanha.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding-top: 125px;
+	padding-bottom: 125px;
+}
+
+.colunaexp {
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.fundocolunaexp {
+	background-color: rgba(255, 255, 255, 0.8);
+	padding: 15px;
+	border-radius: 10px;
+}
+
+.fundo-secao-4 {
+	background-image: url(https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgtKLkJHW3ip6eTwibE9x94gcjXxUe6B_DC1wODSwVU8Awe_RquHsJ3LBGpRiKq88XkMfDiEUzZdtS44vWdS0_OHdt-GR60vspSGTYsMO2sGrwYU-Wk5MD5D61aOcQ5z-sSj50e9DUbIzrM/s1600/Pense+como+uma+montanha.jpg);
+	background-position: center center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	padding-top: 125px;
+	padding-bottom: 125px;
+}
