@@ -32,29 +32,18 @@ class IndexRoute {
 	
 
 	public async locais(req: app.Request, res: app.Response) {
-		let produtoA = {
-			id: 1,
-			nome: "Produto A",
-			valor: 25
-		};
+		let tipos: any[];
+		let locais: any[];
 
-		let produtoB = {
-			id: 2,
-			nome: "Produto B",
-			valor: 15
-		};
-
-		let produtoC = {
-			id: 3,
-			nome: "Produto C",
-			valor: 100
-		};
-
-		let produtosVindosDoBanco = [ produtoA, produtoB, produtoC ];
+		await app.sql.connect(async sql => {
+			tipos = await sql.query("select idtipo, nm_tipo from tipo");
+			locais = await sql.query("select idlocal, idtipo, nm_local, end_local, cep_local, num_local, cidade_local, uf_local from local");
+		});
 
 		let opcoes = {
 			titulo: "Locais",
-			produtos: produtosVindosDoBanco
+			tipos: tipos,
+			locais: locais			
 		};
 
 		res.render("index/locais", opcoes);

@@ -1,5 +1,6 @@
 <div class="container-fluid">
 
+	<!--
 	<div class="row">
 		<div class="col-sm-6 col-lg-4 offset-sm-5 offset-lg-0">
 			<div class="card shadow my-6">
@@ -9,155 +10,45 @@
 			</div>
 		</div>
 	</div>
+	-->
 
 	<hr/>
-
-	<div class="text-center">
-		<a class="link-local" href="...">
-			<img src="/public/img/favoritos.png" width="32" />
-			<br />
-			Favoritos
-		</a>
+	<ul class="nav nav-pills justify-content-center" id="myTab" role="tablist">
+		<% for (let i = 0; i < tipos.length; i++) { %>
+		<li class="nav-item" role="presentation">
+			<button class="nav-link <%= (i ? '' : 'active') %>" id="tab-tipo-<%= tipos[i].idtipo %>" data-toggle="tab" data-target="#painel-<%= tipos[i].idtipo %>" type="button" role="tab" aria-controls="painel-<%= tipos[i].idtipo %>">
+				<img src="/public/img/<%= tipos[i].idtipo %>.png" width="32" />
+				<br />
+				<%= tipos[i].nm_tipo %>
+			</button>
+		</li>
+		<% } %>
+	</ul>
+	<div class="tab-content" id="myTabContent">
+		<% for (let i = 0; i < tipos.length; i++) { %>
+		<div class="tab-pane fade <%= (i ? '' : 'show active') %>" id="painel-<%= tipos[i].idtipo %>" role="tabpanel" aria-labelledby="tab-tipo-<%= tipos[i].idtipo %>">
+			<div class="container-fluid fundodolocal">
+				<div class="row">
 		
-		<a class="link-local" href="...">
-			<img src="/public/img/hospedagem.png" width="31" />
-			<br />
-			Hospedagem
-		</a>
+			<% for (let j = 0; j < locais.length; j++) { let local = locais[j]; if (local.idtipo !== tipos[i].idtipo) { continue; } %>
 
-		<a class="link-local" href="...">
-			<img src="/public/img/caneca-de-cerveja.png" width="31" />
-			<br />
-			Bares
-		</a>
-
-		<a class = "link-local" href = "...">
-			<img src = "/public/img/restaurante.png" width ="31"/>
-			<br />
-			Restaurantes
-		</a>
-
-		<a class = "link-local" hred = "...">
-			<img src = "/public/img/parque.png" width = "31"/>
-			<br />
-			Lazer
-		</a>
-
-		<a class = "link-local" hred = "...">
-			<img src = "/public/img/loja.png" width = "31"/>
-			<br />
-			Lojas
-		</a>
-
-		<a class = "link-local" hred = "...">
-			<img src = "/public/img/correr-atras.png" width = "31"/>
-			<br />
-			Infantil
-		</a>
-
-		<a class="link-local" href="...">
-			<img src="/public/img/turismo.png" width="31" />
-			<br />
-			Turismo
-		</a>
-
-		<a class="link-local" href="...">
-			<img src="/public/img/girassol.png" width="31" />
-			<br />
-			Parceiros PCD
-		</a>
-
-		<a class="link-local" href="...">
-			<br />
-			Filtro
-		</a>
-	</div>
-
-	<div class="container-fluid fundodolocal">
-		<div class="row">
 			<div class="col-md-3 locais">
 				<div class="fundolocais">
 					<p>
-						Local 1
+						<%= local.nm_local %>
 					</p>
 					<p>
 						******
 					</p>
 				</div>
 			</div>
-			<div class="col-md-3 locais">
-				<div class="fundolocais">
-					<p>
-						Local 2
-					</p>
-					<p>
-						******
-					</p>
-				</div>
-			</div>
-			<div class="col-md-3 locais">
-				<div class="fundolocais">
-					<p>
-						Local 3
-					</p>
-					<p>
-						******
-					</p>
-				</div>
-			</div>
-			<div class="col-md-3 locais">
-				<div class="fundolocais">
-					<p>
-						Local 4
-					</p>
-					<p>
-						******
-					</p>
-				</div>
-			</div>
-			<div class="col-md-3 locais">
-				<div class="fundolocais">
-					<p>
-						Local 5
-					</p>
-					<p>
-						******
-					</p>
-				</div>
-			</div>
-			<div class="col-md-3 locais">
-				<div class="fundolocais">
-					<p>
-						Local 6
-					</p>
-					<p>
-						******
-					</p>
-				</div>
-			</div>
-			<div class="col-md-3 locais">
-				<div class="fundolocais">
-					<p>
-						Local 7
-					</p>
-					<p>
-						******
-					</p>
-				</div>
-			</div>
-			<div class="col-md-3 locais" >
-				<div class="fundolocais">
-					<p>
-						Local 8
-					</p>
-					<p>
-						******
-					</p>
+
+			<% } %>
 				</div>
 			</div>
 		</div>
+		<% } %>
 	</div>
-	
 
 <%- contentFor("espaco-head") %>
 <style type="text/css">

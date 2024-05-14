@@ -1,15 +1,30 @@
 CREATE SCHEMA acessibilidade DEFAULT CHARACTER SET utf8mb4 DEFAULT COLLATE utf8mb4_0900_ai_ci;
 USE acessibilidade;
 
+CREATE TABLE tipo (
+  idtipo INT NOT NULL,
+  nm_tipo VARCHAR(100) NOT NULL,
+  PRIMARY KEY (idtipo)
+);
+
+INSERT INTO tipo (idtipo, nm_tipo) VALUES (1, 'Hospedagem'), (2, 'Bar'), (3, 'Restaurante'), (4, 'Lazer'), (5, 'Loja'), (6, 'Infantil'), (7, 'Turismo'), (8, 'Parceiro PCD');
+
 CREATE TABLE local (
   idlocal INT NOT NULL AUTO_INCREMENT,
+  idtipo INT NOT NULL,
   nm_local VARCHAR(100) NOT NULL,
   end_local VARCHAR(100) NOT NULL,
   cep_local VARCHAR(10) NOT NULL,
   num_local VARCHAR(45) NOT NULL,
   cidade_local VARCHAR(100) NOT NULL,
   uf_local VARCHAR(2) NOT NULL,
-  PRIMARY KEY (idlocal)
+  PRIMARY KEY (idlocal),
+  INDEX fk_local_idtipo_ix (idtipo ASC) VISIBLE,
+  CONSTRAINT fk_local_idtipo
+    FOREIGN KEY (idtipo)
+    REFERENCES tipo (idtipo)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION
 );
 
 CREATE TABLE caracteristica (
