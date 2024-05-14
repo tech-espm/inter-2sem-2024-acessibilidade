@@ -29,6 +29,25 @@ class IndexRoute {
 		res.render("index/experiencias", opcoes);
 	}
 
+	public async novo(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Novo Local"
+		};
+
+		res.render("index/novo", opcoes);
+	}
+
+	@app.http.post()
+	@app.route.formData()
+	public async adicionar(req: app.Request, res: app.Response) {
+
+		await app.sql.connect(async sql => {
+			
+		});
+
+		res.json(true);
+	}
+
 	
 
 	public async locais(req: app.Request, res: app.Response) {
