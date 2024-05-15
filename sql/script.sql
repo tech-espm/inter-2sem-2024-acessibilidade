@@ -7,7 +7,7 @@ CREATE TABLE tipo (
   PRIMARY KEY (idtipo)
 );
 
-INSERT INTO tipo (idtipo, nm_tipo) VALUES (1, 'Hospedagem'), (2, 'Bar'), (3, 'Restaurante'), (4, 'Lazer'), (5, 'Loja'), (6, 'Infantil'), (7, 'Turismo'), (8, 'Parceiro PCD');
+INSERT INTO tipo (idtipo, nm_tipo) VALUES (1, 'Hospedagem'), (2, 'Bares'), (3, 'Restaurante'), (4, 'Lazer'), (5, 'Loja'), (6, 'Infantil'), (7, 'Turismo'), (8, 'Parceiros PCD');
 
 CREATE TABLE local (
   idlocal INT NOT NULL AUTO_INCREMENT,
