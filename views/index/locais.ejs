@@ -1,5 +1,16 @@
 <div class="container-fluid">
 
+	<h1 class="my-4">
+		Locais
+	</h1>
+	<p>
+		Lugares para você e seu colarinho poderem passear sem inseguranças e colaborando pela nossa comunidade PCD !
+	</p>
+
+</div>
+
+<div class="container-fluid">
+
 	<!--
 	<div class="row">
 		<div class="col-sm-6 col-lg-4 offset-sm-5 offset-lg-0">
@@ -13,6 +24,8 @@
 	-->
 
 	<hr class="my-4" />
+
+<!-- Abinhas -->
 
 	<ul class="nav nav-pills justify-content-center" id="myTab" role="tablist">
 		<% for (let i = 0; i < tipos.length; i++) { %>
@@ -28,6 +41,7 @@
 
 	<hr class="my-4" />
 
+<!-- Mudança de cor dos cards de locais -->
 	<div class="tab-content" id="myTabContent">
 		<% for (let i = 0; i < tipos.length; i++) { %>
 		<div class="tab-pane fade <%= (i ? '' : 'show active') %>" id="painel-<%= tipos[i].idtipo %>" role="tabpanel" aria-labelledby="tab-tipo-<%= tipos[i].idtipo %>">
@@ -47,6 +61,7 @@
 			%>
 			<% for (let j = 0; j < locais.length; j++) { let local = locais[j]; if (local.idtipo !== tipos[i].idtipo) { continue; } temLocal = true; %>
 
+			<!-- Cards locais-->
 			<div class="col-sm-6 col-md-4 locais">
 				<div class="card shadow <%= classes[classeAtual % classes.length] %>">
 					<img src="/public/img/balao.jpg" class="card-img-top" alt="...">

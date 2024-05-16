@@ -1,41 +1,100 @@
 <div class="container-fluid">
 
-	<h1>
+	<h1 class="my-4">
 		Eventos
 	</h1>
 
 	<p>
-		Lista de Eventos em andamento 
+		Venha conferir os eventos e festivais para ajudar ainda mais na sua experiência e diversão pelo nosso Mundo Colarinho!
 	</p>
 
-</div>
-<div class="container-fluid fundo-secao-4">
 	<div class="row">
-		<div class="col-md-5 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/thetown.jpg">
-				</p>
-				<p>
-					Festival The Town - SP aaaa
-				</p>
-				<p>
-					dd/mm - dd/mm 
-				</p>
+		<%
+			let eventos = [
+				{
+					imagem: "/public/img/thetown.jpg",
+					nome: "Festival de música The Town",
+					lugar: "São Paulo - SP",
+					data: "3, 7, 9 e 10/09/2024"
+				},
+				{
+					imagem: "/public/img/casaluce2.jpg",
+					nome: "Festa Italiana de Casaluce",
+					lugar: "São Paulo - SP",
+					data: "27/04/2024 a 26/05/2024"
+				},
+				{
+					imagem: "/public/img/oktoberfest.webp",
+					nome: "Oktoberfest 2024",
+					lugar: "Parque Villa Lobos - São Paulo - SP",
+					data: "10/10/2024 a 13/10/2024 e 17/10/2024 a 20/10/2024"
+				},
+				{
+					imagem : "/public/img/lollapalooza.webp",
+					nome: "Festival de música Lollapalooza",
+					lugar: "São Paulo - SP",
+					data: "28,26 e 30/03/2025"
+
+				},
+				{
+					imagem: "/public/img/bgs.webp",
+					nome: "Brasil Game Show (BGS)",
+					lugar: "São Paulo - SP",
+					data: "9/10/2024 a 13/10/2024"
+				},
+				{
+					imagem: "/public/img/ccxp.jpg",
+					nome : "Comic-Con XP (CCXP)",
+					lugar: "São Paulo - SP",
+					data: "5/12/2024 a 8/12/2024"
+				
+				},
+				{
+					imagem: "/public/img/bienal.jpg",
+					nome: "Bienal Internacional do Livro",
+					lugar: "São Paulo - SP",
+					data: "6/09/2024 a 15/09/2024"
+				},
+				{
+					imagem: "/public/img/nomade.jpg",
+					nome: "Festival de música Nômade",
+					lugar: "São Paulo - SP",
+					data: "25/05/2024"
+				},
+			
+
+			];
+			let classes = [
+				"text-white bg-secondary",
+				"text-white bg-success",
+				"bg-warning",
+				"text-white bg-info",
+				"bg-light"
+			];
+		%>
+		<% for (let i = 0; i < eventos.length; i++) { %>
+
+		<div class="col-md-4 locais">
+			<div class="card shadow <%= classes[i % classes.length] %>">
+				<img src="<%= eventos[i].imagem %>" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<%= eventos[i].nome %>
+					</h5>
+
+					<h6 class = "card-text">
+						<%= eventos[i].lugar %>
+						<p>
+							<%= eventos[i].data %>
+						</p>
+					</h6>
+					
+
+				</div>
 			</div>
 		</div>
-		<div class="col-md-5 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/casaluce.jpg">
-				</p>
-				<p>
-					Festa Italiana Nossa Senhora de Casaluce - SP aaaa
-				</p>
-				<p>
-					dd/mm - dd/mm 
-				</p>
-			</div>
-		</div>
+
+		<% } %>
+
 	</div>
 </div>

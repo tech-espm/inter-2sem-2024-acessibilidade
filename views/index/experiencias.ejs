@@ -1,118 +1,93 @@
-<div class="container-fluid fundo-secao-4">
+<div class="container-fluid">
 
-	<h1>
+	<h1 class="my-4">
 		Experiências
 	</h1>
 
 	<p>
-		Lista de experiências
+		Confira as experiências disponíveis para curtir a vida como aproveitadas pela nossa comunidade PCD e admirar a beleza do nosso Mundo !
 	</p>
-</div>
 
-<div class="container-fluid fundo-secao-4">
 	<div class="row">
-		<div class="col-md-3 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/modalidades-de-salto-no-paraquedismo.jpg">
-				</p>
-				<p>
-					Paraquedismo
-				</p>
-				<p>
-					Boituva - SP
-				</p>
+		<%
+			let experiencias = [
+				{
+					imagem: "/public/img/balao.jpg",
+					nome: "Voo de Balão",
+					lugar: "Boituva - SP"
+				},
+				{
+					imagem: "/public/img/asadelta.jpg",
+					nome: "Asa Delta",
+					lugar: "Atibaia - SP"
+				},
+				{
+					imagem: "/public/img/kitesurf.jpg",
+					nome: "kitesurf",
+					lugar: "Guarapiranga - SP"
+				},
+				{
+					imagem : "/public/img/cavernadodiabo2.webp",
+					nome: "Excursão pela Caverna do Diabo",
+					lugar: "Eldorado - SP"
+
+				},
+				{
+					imagem: "/public/img/citytuor2.webp",
+					nome: "City Tuor por São Paulo",
+					lugar: "São Paulo - SP"
+				},
+				{
+					imagem: "/public/img/parapente.webp",
+					nome : "Voo de Parapente",
+					lugar: "Atibaia - SP"
+				
+				},
+				{
+					imagem: "/public/img/modalidades-de-salto-no-paraquedismo.jpg",
+					nome: "Paraquedismo",
+					lugar: "Boituva - SP"
+				},
+				{
+					imagem: "/public/img/trilhacantareira.jpg",
+					nome: "Trilha pela Serra da Cantareira",
+					lugar: "Serra da Cantareira - SP"
+				},
+				{
+					imagem: "/public/img/mergulho.jpg",
+					nome: "Mergulho no mar",
+					lugar: "Ilha Bela - SP"
+				},
+			
+
+			];
+			let classes = [
+				"text-white bg-secondary",
+				"text-white bg-success",
+				"bg-warning",
+				"text-white bg-info",
+				"bg-light"
+			];
+		%>
+		<% for (let i = 0; i < experiencias.length; i++) { %>
+
+		<div class="col-sm-5 col-md-3 locais">
+			<div class="card shadow <%= classes[i % classes.length] %>">
+				<img src="<%= experiencias[i].imagem %>" class="card-img-top" alt="...">
+				<div class="card-body">
+					<h5 class="card-title">
+						<%= experiencias[i].nome %>
+					</h5>
+
+					<h6 class = "card-text">
+						<%= experiencias[i].lugar %>
+					</h6>
+
+				</div>
 			</div>
 		</div>
-		<div class="col-md-3 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/balao.jpg">
-				</p>
-				<p>
-					Voo de Balão
-				</p>
-				<p>
-					Santo André - SP
-				</p>
-			</div>
-		</div>
-		<div class="col-md-3 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/caverna.jpg">
-				</p>
-				<p>
-					Excursão pela Caverna do Diabo
-				</p>
-				<p>
-					Eldorad - SP
-				</p>
-			</div>
-		</div>
-		<div class="col-md-3 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/trilhacantareira.jpg">
-				</p>
-				<p>
-					Trilha pela Serra da Cantareira
-				</p>
-				<p>
-					Serra da Cantareira - SP
-				</p>
-			</div>
-		</div>
-		<div class="col-md-3 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/paraglider.jpg">
-				</p>
-				<p>
-					Voo de Paraglider
-				</p>
-				<p>
-					Atibaia - SP
-				</p>
-			</div>
-		</div>
-		<div class="col-md-3 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/asadelta.jpg">
-				</p>
-				<p>
-					Voo de Asa Delta
-				</p>
-				<p>
-					Atibaia - SP
-				</p>
-			</div>
-		</div>
-		<div class="col-md-3 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/citytuor.webp">
-				</p>
-				<p>
-					City Tuor por SP
-				</p>
-				<p>
-					Companhia X
-				</p>
-			</div>
-		</div>
-		<div class="col-md-3 colunaexp">
-			<div class="fundocolunaexp">
-				<p>
-					<img src="/public/img/kitesurf.jpg">
-				</p>
-				<p>
-					Kitesurf
-				</p>
-				<p>
-					Ilha Bela - SP
-				</p>
-			</div>
-		</div>
+
+		<% } %>
+
 	</div>
+</div>
