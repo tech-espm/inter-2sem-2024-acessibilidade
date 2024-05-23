@@ -30,8 +30,15 @@ class IndexRoute {
 	}
 
 	public async novo(req: app.Request, res: app.Response) {
+		let tipos: any[];
+
+		await app.sql.connect(async sql => {
+			tipos = await sql.query("select idtipo, nm_tipo from tipo order by nm_tipo");
+		});
+
 		let opcoes = {
-			titulo: "Novo Local"
+			titulo: "Novo Local",
+			tipos: tipos
 		};
 
 		res.render("index/novo", opcoes);

@@ -6,43 +6,43 @@
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="nome">Nome</label>
-                <input type="text" id="nome" name="nome" class="form-control" />
+                <label for="nm_local">Nome</label>
+                <input type="text" id="nm_local" name="nm_local" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="Endereço">Endereço</label>
-                <input type="text" id="Endereço" name="Endereço" class="form-control" />
+                <label for="end_local">Endereço</label>
+                <input type="text" id="end_local" name="end_local" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="cep">cep</label>
-                <input type="text" id="cep" name="cep" class="form-control" />
+                <label for="cep_local">cep</label>
+                <input type="text" id="cep_local" name="cep_local" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="Numero">Numero</label>
-                <input type="text" id="Numero" name="Numero" class="form-control" />
+                <label for="num_local">Numero</label>
+                <input type="text" id="num_local" name="num_local" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="Cidade">Cidade</label>
-                <input type="text" id="Cidade" name="Cidade" class="form-control" />
+                <label for="cidade_local">Cidade</label>
+                <input type="text" id="cidade_local" name="cidade_local" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="Estado">Estado</label>
-                <input type="text" id="Estado" name="Estado" class="form-control" />
+                <label for="uf_local">Estado</label>
+                <input type="text" id="uf_local" name="uf_local" class="form-control" />
             </div>
         </div>
 
@@ -50,10 +50,9 @@
             <div class="form-group">
                 <label for="idtipo">Tipo</label>
                 <select id="idtipo" name="idtipo" class="form-control">
-                    <option value="1">Hospedagem</option>
-                    <option value="2">Alimentação</option>
-                    <option value="3">Lazer</option>
-                    <option value="4">Outros</option>
+                    <% for (let i = 0; i < tipos.length; i++) { %>
+                    <option value="<%= tipos[i].idtipo %>"><%= tipos[i].nm_tipo %></option>
+                    <% } %>
                 </select>
             </div>
         </div>
@@ -68,6 +67,7 @@
 
         function criar() {
             // fetch("/criarLocal")
+            fetch("/criarLocal")
         }
 
     </script>
