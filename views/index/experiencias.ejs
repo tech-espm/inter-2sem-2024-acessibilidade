@@ -80,8 +80,25 @@
 			];
 		%>
 		<% for (let i = 0; i < experiencias.length; i++) { %>
-
 		<div class="col-sm-5 col-md-3 locais">
+<!--
+			<div class="card-hover shadow">
+				<div class="img-box">
+					<img src="<%= experiencias[i].imagem %>">
+				</div>
+				<div class="content-hover text-center">
+					<h2>
+						<%= experiencias[i].nome %>
+					</h2>
+					<p>
+						<%= experiencias[i].lugar %>
+					</p>
+					<a href="https://google.com" class="read-more">
+						Veja Mais
+					</a>
+				</div>
+			</div>
+		-->
 			<div class="card shadow <%= classes[i % classes.length] %>">
 				<img src="<%= experiencias[i].imagem %>" class="card-img-top" alt="...">
 				<div class="card-body">
@@ -95,6 +112,7 @@
 
 				</div>
 			</div>
+
 		</div>
 
 		<% } %>
