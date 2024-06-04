@@ -42,8 +42,8 @@
 
 		let ponto = this.ponto;
 
-		popup.setLatLng([ponto.lat, ponto.lng]);
-		popup.setContent("<h1>" + ponto.nome + "</h1><p>" + ponto.descricao + "</p>");
+		popup.setLatLng([ponto.lat_local, ponto.lng_local]);
+		popup.setContent("<h1>" + ponto.nm_local + "</h1><p>" + ponto.end_local + ", " + ponto.num_local + "</p>");
 		popup.openOn(mapa);
 	}
 
@@ -61,32 +61,10 @@
 
 		highDpi = ((highDpi = window.matchMedia("(min-resolution: 150dpi)")) && highDpi.matches);
 
-		let pontos = [
-			{
-				id: 1,
-				nome: "Ponto 1",
-				descricao: "Descrição do ponto 1",
-				lat: -20.143484115600586,
-				lng: -44.2154655456543
-			},
-			{
-				id: 2,
-				nome: "Ponto 2",
-				descricao: "Descrição do ponto 2",
-				lat: -20.142066955566406,
-				lng: -44.214378356933594
-			},
-			{
-				id: 3,
-				nome: "Ponto 3",
-				descricao: "Descrição do ponto 3",
-				lat: -20.14223861694336,
-				lng: -44.21717071533203
-			}
-		];
+		let pontos = <%- JSON.stringify(locais) %>;
 
 		for (var i = 0; i < pontos.length; i++) {
-			var marker = L.marker([pontos[i].lat, pontos[i].lng], { icon: icon });
+			var marker = L.marker([pontos[i].lat_local, pontos[i].lng_local], { icon: icon });
 		
 			marker.addTo(mapa);
 			marker.ponto = pontos[i];

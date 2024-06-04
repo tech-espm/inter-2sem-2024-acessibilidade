@@ -7,42 +7,42 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="nm_local">Nome</label>
-                <input type="text" id="nm_local" name="nm_local" class="form-control" />
+                <input type="text" id="nm_local" name="nm_local" maxlength="100" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="end_local">Endereço</label>
-                <input type="text" id="end_local" name="end_local" class="form-control" />
+                <input type="text" id="end_local" name="end_local" maxlength="100" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
-                <label for="cep_local">cep</label>
-                <input type="text" id="cep_local" name="cep_local" class="form-control" />
+                <label for="cep_local">CEP</label>
+                <input type="text" id="cep_local" name="cep_local" maxlength="10" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="num_local">Numero</label>
-                <input type="text" id="num_local" name="num_local" class="form-control" />
+                <input type="text" id="num_local" name="num_local" maxlength="45" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="cidade_local">Cidade</label>
-                <input type="text" id="cidade_local" name="cidade_local" class="form-control" />
+                <input type="text" id="cidade_local" name="cidade_local" maxlength="100" class="form-control" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="uf_local">Estado</label>
-                <input type="text" id="uf_local" name="uf_local" class="form-control" />
+                <input type="text" id="uf_local" name="uf_local" maxlength="2" class="form-control" />
             </div>
         </div>
 
@@ -56,19 +56,187 @@
                 </select>
             </div>
         </div>
+		<input type="hidden" id="lat_local" name="lat_local" />
+		<input type="hidden" id="lng_local" name="lng_local" />
 
     </div>
+
+	<div id="mapa"></div>
 
     <div class="text-center">
         <button type="button" class="btn btn-primary" onclick="criar()">Criar</button>
     </div>
-
-    <script type="text/javascript">
-
-        function criar() {
-            // fetch("/criarLocal")
-            fetch("/criarLocal")
-        }
-
-    </script>
 </div>
+
+<%- contentFor("espaco-head") %>
+
+<link rel="stylesheet" href="/public/css/leaflet-1.7.1.css" />
+<style type="text/css">
+	#mapa {
+		width: 100%;
+		height: 400px;
+	}
+</style>
+
+<%- contentFor("espaco-rodape") %>
+<script type="text/javascript" src="/public/js/leaflet-1.7.1.js"></script>
+
+<script type="text/javascript">
+
+	async function criar() {
+
+		let inputnm_local = document.getElementById("nm_local");
+		let inputend_local = document.getElementById("end_local");
+		let inputcep_local = document.getElementById("cep_local");
+		let inputnum_local = document.getElementById("num_local");
+		let inputcidade_local = document.getElementById("cidade_local");
+		let inputuf_local = document.getElementById("uf_local");
+		let inputidtipo = document.getElementById("idtipo");
+		let inputlat_local = document.getElementById("lat_local");
+		let inputlng_local = document.getElementById("lng_local");
+
+		let nm_local = inputnm_local.value;
+		let end_local = inputend_local.value;
+		let cep_local = inputcep_local.value;
+		let num_local = inputnum_local.value;
+		let cidade_local = inputcidade_local.value;
+		let uf_local = inputuf_local.value;
+		let idtipo = parseInt(inputidtipo.value);
+		let lat_local = parseFloat(inputlat_local.value);
+		let lng_local = parseFloat(inputlng_local.value);
+
+		if (!nm_local) {
+			alert("Nome inválido!");
+			return;
+		}
+		if (!end_local) {
+			alert("Endereço inválido!");
+			return;
+		}
+		if (!cep_local) {
+			alert("cep inválido!");
+			return;
+		}
+		if (!num_local) {
+			alert("Numero inválido!");
+			return;
+		}
+		if (!cidade_local) {
+			alert("CIdade inválida!");
+			return;
+		}
+		if (!uf_local) {
+			alert("Estado inválido!");
+			return;
+		}
+		if (!idtipo) {
+			alert("Tipo inválido!");
+			return;
+		}
+		if (!lat_local) {
+			alert("Latitude inválida!");
+			return;
+		}
+		if (!lng_local) {
+			alert("Longitude inválida!");
+			return;
+		}
+
+		let local = {
+			nm_local: nm_local,
+			end_local: end_local,
+			cep_local: cep_local,
+			num_local: num_local,
+			cidade_local: cidade_local,
+			uf_local: uf_local,
+			idtipo: idtipo,
+			lat_local: lat_local,
+			lng_local: lng_local
+		};
+
+		try {
+
+			let response = await fetch("/adicionar", {
+				method: "POST",
+				body: JSON.stringify(local),
+				headers: {
+					"content-type": "application/json"
+				}
+			});
+
+			if (!response.ok) {
+				alert("Ocorreu um erro ao criar o local :(");
+				return;
+			}
+
+			inputnm_local.value = "";
+			inputend_local.value = "";
+			inputcep_local.value = "";
+			inputnum_local.value = "";
+			inputcidade_local.value = "";
+			inputuf_local.value = "";
+			inputidtipo.value = "";
+			inputlat_local.value = "";
+			inputlng_local.value = "";
+
+			if (marker) {
+				marker.remove();
+				marker = null;
+			}
+
+			alert("Local criado com sucesso!");
+
+		} catch (ex) {
+			alert("Ocorreu um erro de rede ao criar o local: " + ex.message)
+		}
+
+	}
+
+	let mapa = L.map("mapa", { zoomControl: false });
+	let marker = null;
+
+	function iniciarMapa(lat, lng) {
+		let latlng = new L.LatLng(lat, lng);
+
+		L.control.zoom({
+			position: "topright"
+		}).addTo(mapa);
+
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+			subdomains: ['a', 'b', 'c'],
+			center: [latlng],
+			minZoom: 10
+		}).addTo(mapa);
+
+		mapa.on("click", function (e) {
+
+			let highDpi = ("matchMedia" in window);
+				icon = L.icon({
+					iconUrl: (highDpi ? "/public/img/marker@2x.png" : "/public/img/marker.png"),
+					iconSize: [25, 34],
+					iconAnchor: [12, 34],
+					popupAnchor: [0, 25]
+				});
+
+			highDpi = ((highDpi = window.matchMedia("(min-resolution: 150dpi)")) && highDpi.matches);
+
+			let inputlat_local = document.getElementById("lat_local");
+			let inputlng_local = document.getElementById("lng_local");
+			inputlat_local.value = e.latlng.lat;
+			inputlng_local.value = e.latlng.lng;
+
+			if (marker) {
+				marker.remove();
+			}
+
+			marker = L.marker([e.latlng.lat, e.latlng.lng], { icon: icon });
+			marker.addTo(mapa);
+		});
+
+		mapa.setView(latlng, 16);
+	}
+
+	iniciarMapa(-20.14348488422722, -44.2154639038087);
+
+</script>
