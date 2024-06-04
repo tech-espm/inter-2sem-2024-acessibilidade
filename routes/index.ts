@@ -23,10 +23,18 @@ class IndexRoute {
 
 	public async experiencias(req: app.Request, res: app.Response) {
 		let opcoes = {
-			titulo: "Experiencias"
+			titulo: "Experiências"
 		};
 
 		res.render("index/experiencias", opcoes);
+	}
+
+	public async registrar(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Registrar-se"
+		};
+
+		res.render("index/registrar", opcoes);
 	}
 
 	public async novo(req: app.Request, res: app.Response) {

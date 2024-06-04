@@ -1,0 +1,147 @@
+<div class="container-fluid pt-5">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 offset-md-2">
+            <div class="form-group">
+                <label for="inputNome">Nome</label>
+                <input class="form-control" type="text" id="inputNome" maxlength="100" />
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="form-group">
+                <label for="inputEmail">E-mail</label>
+                <input class="form-control" type="email" id="inputEmail" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4 offset-md-2">
+            <div class="form-group">
+                <label for="inputTipo">Tipo de Deficiência (Vazio para nenhuma)</label>
+                <input class="form-control" type="text" id="inputTipo" maxlength="50" />
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="form-group">
+                <label for="inputCelular">Numero de Celular</label>
+                <input class="form-control" type="text" id="inputCelular" maxlength="13"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4 offset-md-2">
+            <div class="form-group">
+                <label for="inputCPF">CPF</label>
+                <input class="form-control" type="text" id="inputCPF" maxlength="11" />
+            </div>
+        </div>
+
+        <div class="col-sm-6 col-md-4">
+            <div class="form-group">
+                <label for="inputRG">RG</label>
+                <input class="form-control" type="text" id="inputRG" maxlength="9" />
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-4 offset-md-2">
+            <button type="button" class="btn btn-primary" onclick="criarConta()">
+                Criar Conta
+            </button>
+        </div>
+    </div>
+
+</div>
+
+<script type="text/javascript">
+
+    async function criarConta() {
+
+        let inputNome = document.getElementById("inputNome");
+        let inputEmail = document.getElementById("inputEmail");
+        let inputTipo = document.getElementById("inputTipo");
+        let inputCelular = document.getElementById("inputCelular");
+        let inputCPF = document.getElementById("inputCPF");
+        let inputRG = document.getElementById("inputRG");
+
+        let nome = inputNome.value;
+        let email = inputEmail.value;
+        let deficiencia = inputTipo.value;
+        let celular = inputCelular.value;
+        let cpf = inputCPF.value;
+        let rg = inputRG.value;
+
+        if (!nome) {
+            alert("Nome inválido! 😥");
+            return;
+        }
+
+        if (!email) {
+            alert("E-mail inválido! 😥");
+            return;
+        }
+
+        if (!deficiencia) {
+            alert("Deficiência inválida! 😥");
+            return;
+        }
+
+        if (!celular) {
+            alert("Celular inválido! 😥");
+            return;
+        }
+
+        if (!cpf) {
+            alert("CPF inválido! 😥");
+            return;
+        }
+
+        if (!rg) {
+            alert("RG inválido! 😥");
+            return;
+        }
+
+        let pessoa = {
+            nome: nome,
+            email: email,
+            deficiencia: deficiencia,
+            celular: celular,
+            cpf: cpf,
+            rg: rg
+        };
+
+        try {
+
+            let response = await fetch("...", {
+                method: "POST",
+                body: JSON.stringify(pessoa),
+                headers: {
+                    "content-type": "application/json"
+                }
+            });
+
+            if (!response.ok) {
+                alert("Ocorreu um erro ao criar a conta 😥");
+                return;
+            }
+
+            inputNome.value = "";
+            inputEmail.value = "";
+            inputTipo.value = "";
+            inputCelular.value = "";
+            inputCPF.value = "";
+            inputRG.value = "";
+
+            alert("Conta criada com sucesso! 😁");
+
+        } catch (ex) {
+            alert("Ocorreu um erro de rede ao criar a Conta: " + ex.message)
+        }
+
+    }
+
+</script>
