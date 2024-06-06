@@ -63,8 +63,10 @@
 
 			<!-- Cards locais-->
 			<div class="col-sm-6 col-md-4 locais">
-				<div class="card shadow <%= classes[classeAtual % classes.length] %>">
-					<img src="/public/img/balao.jpg" class="card-img-top" alt="...">
+				<a href="/editar?idlocal=<%= local.idlocal %>" class="card shadow <%= classes[classeAtual % classes.length] %>" style="text-decoration: none;">
+					<div class="p-2" style="background-color: #ffffff; border-top-left-radius: 4px; border-top-right-radius: 4px;">
+						<img src="/public/img/<%= local.idtipo %>.png" class="card-img-top" style="display: block; width: 50%; margin: 0px auto;" alt="...">
+					</div>
 					<div class="card-body">
 						<h5 class="card-title">
 							<%= local.nm_local %>
@@ -73,7 +75,7 @@
 							<%= local.end_local %>, <%= local.num_local %>, <%= local.cidade_local %> - <%= local.uf_local %>
 						</p>
 					</div>
-				</div>
+				</a>
 				<!--
 				<div class="fundolocais">
 					<p>

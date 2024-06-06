@@ -1,18 +1,6 @@
 ﻿<div class="container-fluid">
-
-	<div class="row">
-		<div class="col-sm-3 col-lg-2 offset-sm-6 offset-lg-0">
-			<div class="card shadow my-3">
-				<div class="card-body">
-					Insira a Região
-				</div>
-			</div>
-			<div class="card shadow my-1">
-				<div class="card-body">
-					Perto de mim (ativar)
-				</div>
-			</div>
-		</div>
+	<div class="text-center">
+		<button type="button" onclick="obterLocalizacao()" class="btn btn-primary">Ativar Minha Localização!</button>
 	</div>
 </div>
 
@@ -33,7 +21,59 @@
 
 <script type="text/javascript">
 	let mapa = L.map("mapa", { zoomControl: false }),
+		markerLocal = null, procurandoLocalizacao = false,
+		highDpi = ("matchMedia" in window),
 		popup = L.popup();
+
+	highDpi = (highDpi && (highDpi = window.matchMedia("(min-resolution: 150dpi)")) && highDpi.matches);
+
+	function obterLocalizacao() {
+		if (procurandoLocalizacao)
+			return;
+
+		waitSwal();
+
+		let erroLocalizacao = function () {
+			procurandoLocalizacao = false;
+			Swal.fire({
+				icon: "error",
+				title: "Oops...",
+				text: "Não foi possível obter sua localização no momento. Por favor, tente novamente dentro de alguns instantes"
+			});
+		};
+
+		if (!("geolocation" in navigator) || !navigator.geolocation.getCurrentPosition) {
+			erroLocalizacao();
+			return;
+		}
+
+		procurandoLocalizacao = true;
+
+		navigator.geolocation.getCurrentPosition(function (location) {
+			procurandoLocalizacao = false;
+			if (!location || !location.coords) {
+				erroLocalizacao();
+			} else {
+				Swal.close();
+				mapa.setView(new L.LatLng(location.coords.latitude, location.coords.longitude), 16);
+				if (markerLocal) {
+					markerLocal.remove();
+					markerLocal = null;
+				}
+				markerLocal = L.marker([location.coords.latitude, location.coords.longitude], { icon: L.icon({
+					iconUrl: (highDpi ? "/public/img/marker@2x.png" : "/public/img/marker.png"),
+					iconSize: [25, 34],
+					iconAnchor: [12, 34],
+					popupAnchor: [0, 25]
+				}) });
+				markerLocal.addTo(mapa);
+			}
+		}, erroLocalizacao, {
+			maximumAge: 60 * 60 * 1000,
+			timeout: 20 * 1000,
+			enableHighAccuracy: true
+		});
+	}
 
 	function onMarkerClick() {
 		// Aqui dentro, this é o objeto marker que foi clicado.
@@ -51,20 +91,28 @@
 		if ($.active)
 			return;
 
-		let highDpi = ("matchMedia" in window);
-			icon = L.icon({
+		let icones = [
+			L.icon({
 				iconUrl: (highDpi ? "/public/img/marker@2x.png" : "/public/img/marker.png"),
 				iconSize: [25, 34],
 				iconAnchor: [12, 34],
 				popupAnchor: [0, 25]
-			});
+			})
+		];
 
-		highDpi = ((highDpi = window.matchMedia("(min-resolution: 150dpi)")) && highDpi.matches);
+		for (let i = 1; i <= 8; i++) {
+			icones.push(L.icon({
+				iconUrl: (highDpi ? `/public/img/marker${i}@2x.png` : `/public/img/marker${i}.png`),
+				iconSize: [25, 34],
+				iconAnchor: [12, 34],
+				popupAnchor: [0, 25]
+			}));
+		}
 
 		let pontos = <%- JSON.stringify(locais) %>;
 
-		for (var i = 0; i < pontos.length; i++) {
-			var marker = L.marker([pontos[i].lat_local, pontos[i].lng_local], { icon: icon });
+		for (let i = 0; i < pontos.length; i++) {
+			let marker = L.marker([pontos[i].lat_local, pontos[i].lng_local], { icon: icones[pontos[i].idtipo] });
 		
 			marker.addTo(mapa);
 			marker.ponto = pontos[i];
@@ -74,7 +122,7 @@
 	}
 
 	function iniciarMapa(lat, lng) {
-		var latlng = new L.LatLng(lat, lng);
+		let latlng = new L.LatLng(lat, lng);
 
 		L.control.zoom({
 			position: "topright"
@@ -84,20 +132,14 @@
 			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
 			subdomains: ['a', 'b', 'c'],
 			center: [latlng],
-			minZoom: 10
+			minZoom: 5
 		}).addTo(mapa);
-
-		mapa.on("click", function (e) {
-			popup.setLatLng([e.latlng.lat, e.latlng.lng]);
-			popup.setContent("<p>Você clicou em " + e.latlng.lat.toFixed(8) + ", " + e.latlng.lng.toFixed(8) + "</p>");
-			popup.openOn(mapa);
-		});
 
 		mapa.setView(latlng, 16);
 
 		listarPontos();
 	}
 
-	iniciarMapa(-20.14348488422722, -44.2154639038087);
+	iniciarMapa(-23.5870798, -46.6444253);
 
 </script>
