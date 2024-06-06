@@ -83,6 +83,13 @@ html, body {
 	background-color:rgb(130, 181, 54)
 	
 }
+
+.titulodesc{
+	text-align: center;
+	font-weight: bold;
+	font-size: 50px;
+}
+
 /*
 .card-hover {
     width: 100%;
