@@ -23,6 +23,14 @@ class IndexRoute {
 		res.render("index/sobre", opcoes);
 	}
 
+	public async facaparte(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "Faça-Parte"
+		};
+
+		res.render("index/facaparte", opcoes);
+	}
+
 	public async eventos(req: app.Request, res: app.Response) {
 		let opcoes = {
 			titulo: "Eventos"
