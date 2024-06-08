@@ -31,6 +31,14 @@ class IndexRoute {
 		res.render("index/facaparte", opcoes);
 	}
 
+	public async confirmacao(req: app.Request, res: app.Response) {
+		let opcoes = {
+			titulo: "confirmacao"
+		};
+
+		res.render("index/confirmacao", opcoes);
+	}
+
 	public async eventos(req: app.Request, res: app.Response) {
 		let opcoes = {
 			titulo: "Eventos"
