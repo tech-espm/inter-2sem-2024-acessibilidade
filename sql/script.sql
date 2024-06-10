@@ -20,6 +20,7 @@ CREATE TABLE local (
   uf_local VARCHAR(2) NOT NULL,
   lat_local FLOAT NOT NULL,
   lng_local FLOAT NOT NULL,
+  estrelas TINYINT NOT NULL,
   PRIMARY KEY (idlocal),
   INDEX fk_local_idtipo_ix (idtipo ASC) VISIBLE,
   CONSTRAINT fk_local_idtipo

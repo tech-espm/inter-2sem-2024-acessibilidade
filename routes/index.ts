@@ -219,8 +219,13 @@ class IndexRoute {
 			return;
 		}
 
+		if (!local.estrelas) {
+			res.status(400).json("estrelas inválido!");
+			return;
+		}
+
 		await app.sql.connect(async sql => {
-			await sql.query("update local set idtipo = ?, nm_local = ?, end_local = ?, cep_local = ?, num_local = ?, cidade_local = ?, uf_local = ?, lat_local = ?, lng_local = ? where idlocal = ?", [ local.idtipo, local.nm_local, local.end_local, local.cep_local, local.num_local, local.cidade_local, local.uf_local, local.lat_local, local.lng_local, local.idlocal ]);
+			await sql.query("update local set idtipo = ?, nm_local = ?, end_local = ?, cep_local = ?, num_local = ?, cidade_local = ?, uf_local = ?, lat_local = ?, lng_local = ?, estrelas = ?, where idlocal = ?", [ local.idtipo, local.nm_local, local.end_local, local.cep_local, local.num_local, local.cidade_local, local.uf_local, local.lat_local, local.lng_local, local.idlocal, local.estrelas ]);
 		});
 
 		res.json(true);
@@ -232,7 +237,7 @@ class IndexRoute {
 
 		await app.sql.connect(async sql => {
 			tipos = await sql.query("select idtipo, nm_tipo from tipo");
-			locais = await sql.query("select idlocal, idtipo, nm_local, end_local, cep_local, num_local, cidade_local, uf_local from local");
+			locais = await sql.query("select idlocal, idtipo, nm_local, end_local, cep_local, num_local, cidade_local, uf_local, estrelas from local");
 		});
 
 		let opcoes = {

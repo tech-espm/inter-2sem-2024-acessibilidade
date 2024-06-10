@@ -1,7 +1,7 @@
 <div class="container-fluid">
 
 	<h1 class="mt-5 mb-5 titulodesc">
-		Novo Local
+		Novo Local de Avaliação
 	</h1>
 
     <div class="row mb-5">
@@ -45,6 +45,13 @@
             <div class="form-group">
                 <label for="uf_local">Estado</label>
                 <input type="text" id="uf_local" name="uf_local" maxlength="2" class="form-control" />
+            </div>
+        </div>
+
+		<div class="col-sm-4">
+            <div class="form-group">
+                <label for="uf_local">Estrelas</label>
+                <input type="number" id="estrelas" name="estrelas" maxlength="1" class="form-control" />
             </div>
         </div>
 
@@ -104,6 +111,7 @@
 		let inputidtipo = document.getElementById("idtipo");
 		let inputlat_local = document.getElementById("lat_local");
 		let inputlng_local = document.getElementById("lng_local");
+		let inputestrelas = document.getElementById("estrelas");
 
 		let nm_local = inputnm_local.value;
 		let end_local = inputend_local.value;
@@ -114,6 +122,7 @@
 		let idtipo = parseInt(inputidtipo.value);
 		let lat_local = parseFloat(inputlat_local.value);
 		let lng_local = parseFloat(inputlng_local.value);
+		let estrelas = parseInt(inputidtipo.estrelas);
 
 		if (!nm_local) {
 			alert("Nome inválido!");
@@ -151,6 +160,10 @@
 			alert("Longitude inválida!");
 			return;
 		}
+		if (!estrelas) {
+			alert("Estrelas inválidas!");
+			return;
+		}
 
 		let local = {
 			nm_local: nm_local,
@@ -161,7 +174,8 @@
 			uf_local: uf_local,
 			idtipo: idtipo,
 			lat_local: lat_local,
-			lng_local: lng_local
+			lng_local: lng_local,
+			estrelas: estrelas
 		};
 
 		try {
@@ -188,13 +202,14 @@
 			inputidtipo.value = "";
 			inputlat_local.value = "";
 			inputlng_local.value = "";
+			inputestrelas = "";
 
 			if (marker) {
 				marker.remove();
 				marker = null;
 			}
 
-			alert("Local criado com sucesso!");
+			alert("Local criado com sucesso! 😁");
 
 		} catch (ex) {
 			alert("Ocorreu um erro de rede ao criar o local: " + ex.message)
