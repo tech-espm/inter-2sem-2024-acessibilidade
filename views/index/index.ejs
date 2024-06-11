@@ -1,10 +1,12 @@
 ﻿<div class="container-fluid">
 
-	<h1 class="my-5 pt-2 pb-4 titulodesc" style="font-size: 72px; text-shadow: 0.5px 0.2px 0.4px black;">
+	<h1 class="my-5 pt-2 titulodesc" style="font-size: 72px; text-shadow: 0.5px 0.2px 0.4px black;">
 		Mundo Colarinho
 	</h1>
 
-	<div id="carouselExampleCaptions" class="carousel slide countainer" data-ride="carousel" style="width: 1000px;height: auto; text-shadow: 1px 1px 2px black;">
+	<div class="row">
+		<div class="col-lg-10 offset-lg-1">
+			<div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel" style="text-shadow: 1px 1px 2px black;">
 		<ol class="carousel-indicators">
 		  <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
 		  <li data-target="#carouselExampleCaptions" data-slide-to="1"></li>
@@ -12,7 +14,7 @@
 		</ol>
 		<div class="carousel-inner">
 		  <div class="carousel-item active">
-			<img src="/public/img/restaurante.png" class="d-block w-100" alt="Restaurante Recando do Coral">
+			<img src="/public/img/restaurante.png" class="d-block w-100 imagem-carousel" alt="Restaurante Recando do Coral">
 			<div class="carousel-caption d-none d-md-block">
 				<div>
 			  <h5>Recomendação 5 Estrelas!<br>Restaurante - Recanto do Coral</h5>
@@ -21,14 +23,14 @@
 			</div>
 		  </div>
 		  <div class="carousel-item">
-			<img src="/public/img/gliding.png" class="d-block w-100" alt="Vôo de asa delta Verde Alto">
+			<img src="/public/img/gliding.png" class="d-block w-100 imagem-carousel" alt="Vôo de asa delta Verde Alto">
 			<div class="carousel-caption d-none d-md-block">
 			  <h5>Vôo de asa delta Verde Alto</h5>
 			  <p>Para quem gosta de emoção e aventura, vôos de asa delta acompanhados e direcionados à comunidade PCD. 5 Estrelas!</p>
 			</div>
 		  </div>
 		  <div class="carousel-item">
-			<img src="/public/img/Okfest.png" class="d-block w-100" alt="Oktoberfest na OkFest">
+			<img src="/public/img/Okfest.png" class="d-block w-100 imagem-carousel" alt="Oktoberfest na OkFest">
 			<div class="carousel-caption d-none d-md-block">
 			  <h5 >Oktoberfest é na OkFest! Para a comunidade PCD e com DESCONTOS exclusivos! Não perca!</h5>
 			  <!-- <p>Ingressos Oktoberfest exclusivos com DESCONTO! Não Perca!</p> -->
@@ -43,19 +45,17 @@
 		  <span class="carousel-control-next-icon" aria-hidden="true"></span>
 		  <span class="sr-only">Next</span>
 		</a>
-	  </div>
+	  		</div>
 
+			<div class="text-center titulodesc mt-4">
+				<button type="button" onclick="obterLocalizacao()" class="btn btn-primary btn-lg">Ativar Minha Localização!</button>
+			</div>
 
-
-	<div class="text-right titulodesc">
-		<button type="button" onclick="obterLocalizacao()" class="btn btn-primary btn-lg">Ativar Minha Localização!</button>
+			<div id="mapa" class="imagem-carousel"></div>
+			<div style="padding: 30px">
+			</div>
+		</div>
 	</div>
-</div>
-
-<div id="mapa">
-<div class="text-right titulodesc" style="position:absolute;z-index: index 10000;">
-	<button type="button" onclick="obterLocalizacao()" class="btn btn-primary btn-lg">Ativar Minha Localização!</button>
-</div>
 </div>
 
 <%- contentFor("espaco-head") %>
@@ -64,12 +64,20 @@
 <style type="text/css">
 	#mapa {
 		border-radius: 20px;
-		max-width: 100%;
-		width: 1000px;
+		width: 100%;
 		height: 500px;
 		display:inline-flex;
 		justify-content: center;
 		position: relative;
+	}
+
+	.carousel-item {
+		padding: 5px;
+	}
+
+	.imagem-carousel {
+		border-radius: 20px;
+		box-shadow: 3px 2px 3px rgb(82, 82, 82);
 	}
 </style>
 
