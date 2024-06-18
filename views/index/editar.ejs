@@ -1,10 +1,10 @@
 <div class="container-fluid">
 
 	<a href="/locais" type="button" class="btn btn-info btn-sm mt-2">Listar Locais</a>
-	<a href="/editar" type="button" class="btn btn-info btn-sm mt-2">Editar Local</a>
+	<a href="/novo" type="button" class="btn btn-info btn-sm mt-2">Novo Local</a>
 
 	<h1 class="mt-5 mb-5 titulodesc">
-		Editar local de avaliação
+		Editar Local de Avaliação
 	</h1>
 
     <div class="row mb-5">
@@ -12,49 +12,49 @@
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="nm_local">Nome</label>
-                <input type="text" id="nm_local" name="nm_local" maxlength="100" class="form-control" />
+                <input type="text" id="nm_local" name="nm_local" maxlength="100" class="form-control" value="<%= local.nm_local %>" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="end_local">Endereço</label>
-                <input type="text" id="end_local" name="end_local" maxlength="100" class="form-control" />
+                <input type="text" id="end_local" name="end_local" maxlength="100" class="form-control" value="<%= local.end_local %>" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="cep_local">CEP</label>
-                <input type="text" id="cep_local" name="cep_local" maxlength="10" class="form-control" />
+                <input type="text" id="cep_local" name="cep_local" maxlength="10" class="form-control" value="<%= local.cep_local %>" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="num_local">Numero</label>
-                <input type="text" id="num_local" name="num_local" maxlength="45" class="form-control" />
+                <input type="text" id="num_local" name="num_local" maxlength="45" class="form-control" value="<%= local.num_local %>" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="cidade_local">Cidade</label>
-                <input type="text" id="cidade_local" name="cidade_local" maxlength="100" class="form-control" />
+                <input type="text" id="cidade_local" name="cidade_local" maxlength="100" class="form-control" value="<%= local.cidade_local %>" />
             </div>
         </div>
 
         <div class="col-sm-4">
             <div class="form-group">
                 <label for="uf_local">Estado</label>
-                <input type="text" id="uf_local" name="uf_local" maxlength="2" class="form-control" />
+                <input type="text" id="uf_local" name="uf_local" maxlength="2" class="form-control" value="<%= local.uf_local %>" />
             </div>
         </div>
 
 		<div class="col-sm-4">
             <div class="form-group">
-                <label for="uf_local">Estrelas</label>
-                <input type="number" id="estrelas" name="estrelas" maxlength="1" class="form-control" />
+                <label for="estrelas">Estrelas</label>
+                <input type="number" id="estrelas" name="estrelas" maxlength="1" class="form-control" value="<%= local.estrelas %>" />
             </div>
         </div>
 
@@ -63,16 +63,200 @@
                 <label for="idtipo">Tipo</label>
                 <select id="idtipo" name="idtipo" class="form-control">
                     <% for (let i = 0; i < tipos.length; i++) { %>
-                    <option value="<%= tipos[i].idtipo %>"><%= tipos[i].nm_tipo %></option>
+                    <option value="<%= tipos[i].idtipo %>" <%- (tipos[i].idtipo == local.idtipo ? 'selected="selected"' : '') %>><%= tipos[i].nm_tipo %></option>
                     <% } %>
                 </select>
             </div>
         </div>
-		<input type="hidden" id="lat_local" name="lat_local" />
-		<input type="hidden" id="lng_local" name="lng_local" />
+		<input type="hidden" id="idlocal" name="idlocal" value="<%= local.idlocal %>" />
+		<input type="hidden" id="lat_local" name="lat_local" value="<%= local.lat_local %>" />
+		<input type="hidden" id="lng_local" name="lng_local" value="<%= local.lng_local %>" />
 
     </div>
+
+
+	<div class="pt-3" id="mapa"></div>
+
+	<div class="caixa"></div>
+	
     <div class="text-center mb-4">
-        <button type="button" class="btn btn-primary btn-lg" onclick="criar()" style="background-color:darkgreen; border-color: #ffc107">Criar</button>
+        <button type="button" class="btn btn-primary btn-lg" onclick="salvar()" style="background-color:darkgreen; border-color: #ffc107">Salvar</button>
     </div>
 </div>
+
+
+<%- contentFor("espaco-head") %>
+
+<link rel="stylesheet" href="/public/css/leaflet-1.7.1.css" />
+<style type="text/css">
+	#mapa {
+		width: 100%;
+		height: 400px;
+	}
+	.caixa {
+		padding: 20px;
+		background-color: #ffffff;
+	}
+</style>
+
+<%- contentFor("espaco-rodape") %>
+<script type="text/javascript" src="/public/js/leaflet-1.7.1.js"></script>
+
+<script type="text/javascript">
+
+	async function salvar() {
+
+		let inputidlocal = document.getElementById("idlocal");
+		let inputnm_local = document.getElementById("nm_local");
+		let inputend_local = document.getElementById("end_local");
+		let inputcep_local = document.getElementById("cep_local");
+		let inputnum_local = document.getElementById("num_local");
+		let inputcidade_local = document.getElementById("cidade_local");
+		let inputuf_local = document.getElementById("uf_local");
+		let inputidtipo = document.getElementById("idtipo");
+		let inputlat_local = document.getElementById("lat_local");
+		let inputlng_local = document.getElementById("lng_local");
+		let inputestrelas = document.getElementById("estrelas");
+
+		let idlocal = parseInt(inputidlocal.value);
+		let nm_local = inputnm_local.value;
+		let end_local = inputend_local.value;
+		let cep_local = inputcep_local.value;
+		let num_local = inputnum_local.value;
+		let cidade_local = inputcidade_local.value;
+		let uf_local = inputuf_local.value;
+		let idtipo = parseInt(inputidtipo.value);
+		let lat_local = parseFloat(inputlat_local.value);
+		let lng_local = parseFloat(inputlng_local.value);
+		let estrelas = parseInt(inputestrelas.value);
+
+		if (!nm_local) {
+			alert("Nome inválido!");
+			return;
+		}
+		if (!end_local) {
+			alert("Endereço inválido!");
+			return;
+		}
+		if (!cep_local) {
+			alert("cep inválido!");
+			return;
+		}
+		if (!num_local) {
+			alert("Numero inválido!");
+			return;
+		}
+		if (!cidade_local) {
+			alert("CIdade inválida!");
+			return;
+		}
+		if (!uf_local) {
+			alert("Estado inválido!");
+			return;
+		}
+		if (!idtipo) {
+			alert("Tipo inválido!");
+			return;
+		}
+		if (!lat_local) {
+			alert("Latitude inválida!");
+			return;
+		}
+		if (!lng_local) {
+			alert("Longitude inválida!");
+			return;
+		}
+		if (!estrelas) {
+			alert("Estrelas inválidas!");
+			return;
+		}
+
+		let local = {
+			idlocal: idlocal,
+			nm_local: nm_local,
+			end_local: end_local,
+			cep_local: cep_local,
+			num_local: num_local,
+			cidade_local: cidade_local,
+			uf_local: uf_local,
+			idtipo: idtipo,
+			lat_local: lat_local,
+			lng_local: lng_local,
+			estrelas: estrelas
+		};
+
+		try {
+
+			let response = await fetch("/salvar", {
+				method: "POST",
+				body: JSON.stringify(local),
+				headers: {
+					"content-type": "application/json"
+				}
+			});
+
+			if (!response.ok) {
+				alert("Ocorreu um erro ao salvar o local :(");
+				return;
+			}
+
+			alert("Local salvo com sucesso! 😁");
+
+		} catch (ex) {
+			alert("Ocorreu um erro de rede ao criar o local: " + ex.message)
+		}
+
+	}
+
+	let mapa = L.map("mapa", { zoomControl: false });
+	let marker = null;
+
+	function adicionarMarker(lat, lng) {
+		let highDpi = ("matchMedia" in window);
+			icon = L.icon({
+				iconUrl: (highDpi ? "/public/img/marker@2x.png" : "/public/img/marker.png"),
+				iconSize: [25, 34],
+				iconAnchor: [12, 34],
+				popupAnchor: [0, 25]
+			});
+
+		highDpi = ((highDpi = window.matchMedia("(min-resolution: 150dpi)")) && highDpi.matches);
+
+		let inputlat_local = document.getElementById("lat_local");
+		let inputlng_local = document.getElementById("lng_local");
+		inputlat_local.value = lat;
+		inputlng_local.value = lng;
+
+		if (marker) {
+			marker.remove();
+		}
+
+		marker = L.marker([lat, lng], { icon: icon });
+		marker.addTo(mapa);
+	}
+
+	function iniciarMapa(lat, lng) {
+		let latlng = new L.LatLng(lat, lng);
+
+		L.control.zoom({
+			position: "topright"
+		}).addTo(mapa);
+
+		L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+			subdomains: ['a', 'b', 'c'],
+			center: [latlng],
+			minZoom: 10
+		}).addTo(mapa);
+
+		mapa.on("click", function (e) {
+			adicionarMarker(e.latlng.lat, e.latlng.lng);
+		});
+
+		mapa.setView(latlng, 16);
+	}
+
+	iniciarMapa(<%- local.lat_local %>, <%- local.lng_local %>);
+	adicionarMarker(<%- local.lat_local %>, <%- local.lng_local %>);
+
+</script>

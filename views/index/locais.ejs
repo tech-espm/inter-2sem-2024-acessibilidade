@@ -63,9 +63,11 @@
 
 			<!-- Cards locais-->
 			<div class="col-sm-6 col-md-4 locais">
-				<a href="/editar?idlocal=<%= local.idlocal %>" class="card shadow <%= classes[classeAtual % classes.length] %>" style="text-decoration: none;">
+				<div class="card shadow <%= classes[classeAtual % classes.length] %>">
 					<div class="p-2" style="background-color: #ffffff; border-top-left-radius: 4px; border-top-right-radius: 4px;">
-						<img src="/public/img/<%= local.idtipo %>.png" class="card-img-top" style="display: block; width: 50%; margin: 0px auto;" alt="...">
+						<a href="/editar?idlocal=<%= local.idlocal %>" style="text-decoration: none;">
+							<img src="/public/img/<%= local.idtipo %>.png" class="card-img-top" style="display: block; width: 50%; margin: 0px auto;" alt="...">
+						</a>
 					</div>
 					<div class="card-body">
 						<h5 class="card-title">
@@ -74,8 +76,12 @@
 						<p class="card-text">
 							<%= local.end_local %>, <%= local.num_local %>, <%= local.cidade_local %> - <%= local.uf_local %>
 						</p>
+						<p class="card-text">
+							<%= (local.estrelas === 1 ? "1 estrela" : (local.estrelas + " estrelas")) %>
+						</p>
+						<button type="button" class="btn btn-danger btn-sm" onclick="excluir(<%= local.idlocal %>)">Excluir</button>
 					</div>
-				</a>
+				</div>
 				<!--
 				<div class="fundolocais">
 					<p>
@@ -134,3 +140,29 @@
     }
 
 </style>
+
+<script>
+	async function excluir(idlocal) {
+		if (!confirm("Excluir o local?")) {
+			return;
+		}
+
+		try {
+
+			let response = await fetch("/excluir?idlocal=" + idlocal, {
+				method: "DELETE"
+			});
+
+			if (!response.ok) {
+				alert("Ocorreu um erro ao excluir o local :(");
+				return;
+			}
+
+			alert("Local excluído com sucesso! 😁");
+
+			window.location.reload();
+		} catch (ex) {
+			alert("Ocorreu um erro de rede ao excluir o local: " + ex.message)
+		}
+	}
+</script>
