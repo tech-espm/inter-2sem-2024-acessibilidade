@@ -1,0 +1,78 @@
+<div class="container-fluid">
+
+	<a href="/locais" type="button" class="btn btn-info btn-sm mt-2">Listar Locais</a>
+	<a href="/editar" type="button" class="btn btn-info btn-sm mt-2">Editar Local</a>
+
+	<h1 class="mt-5 mb-5 titulodesc">
+		Editar local de avaliação
+	</h1>
+
+    <div class="row mb-5">
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="nm_local">Nome</label>
+                <input type="text" id="nm_local" name="nm_local" maxlength="100" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="end_local">Endereço</label>
+                <input type="text" id="end_local" name="end_local" maxlength="100" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="cep_local">CEP</label>
+                <input type="text" id="cep_local" name="cep_local" maxlength="10" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="num_local">Numero</label>
+                <input type="text" id="num_local" name="num_local" maxlength="45" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="cidade_local">Cidade</label>
+                <input type="text" id="cidade_local" name="cidade_local" maxlength="100" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="uf_local">Estado</label>
+                <input type="text" id="uf_local" name="uf_local" maxlength="2" class="form-control" />
+            </div>
+        </div>
+
+		<div class="col-sm-4">
+            <div class="form-group">
+                <label for="uf_local">Estrelas</label>
+                <input type="number" id="estrelas" name="estrelas" maxlength="1" class="form-control" />
+            </div>
+        </div>
+
+        <div class="col-sm-4">
+            <div class="form-group">
+                <label for="idtipo">Tipo</label>
+                <select id="idtipo" name="idtipo" class="form-control">
+                    <% for (let i = 0; i < tipos.length; i++) { %>
+                    <option value="<%= tipos[i].idtipo %>"><%= tipos[i].nm_tipo %></option>
+                    <% } %>
+                </select>
+            </div>
+        </div>
+		<input type="hidden" id="lat_local" name="lat_local" />
+		<input type="hidden" id="lng_local" name="lng_local" />
+
+    </div>
+    <div class="text-center mb-4">
+        <button type="button" class="btn btn-primary btn-lg" onclick="criar()" style="background-color:darkgreen; border-color: #ffc107">Criar</button>
+    </div>
+</div>
